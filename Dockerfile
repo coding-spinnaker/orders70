@@ -10,7 +10,9 @@ FROM ubuntu:latest as prod
 WORKDIR /root/
 COPY --from=builder /root/app .
 
-CMD apt-get update && apt-get install stress-ng && apt-get clean
+RUN apt-get update && apt-get install -y --no-install-recommends stress-ng \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 
 EXPOSE 8000

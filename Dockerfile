@@ -10,5 +10,8 @@ FROM ubuntu:latest as prod
 WORKDIR /root/
 COPY --from=builder /root/app .
 
+CMD apt-get update && apt-get install stress-ng && apt-get clean
+
+
 EXPOSE 8000
 ENTRYPOINT ["/root/app"]
